@@ -1,0 +1,61 @@
+{
+  "name": "alias-jump",
+  "displayName": "alias_jump",
+  "publisher": "paulgui",
+	"description": "主要为了解决在项目中因定义alias（如‘@’）导致文件之间不能跳转的问题，支持一个目录一个项目，以及一个目录中存在多个子项目的情况",
+  "keywords": [ "vscode", "alias", "jump" ],
+  "icon": "images/logo.png",
+  "version": "1.0.1",
+  "engines": {
+    "vscode": "^1.47.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:vue",
+    "onLanguage:jsx-tags"
+  ],
+  "main": "./src/extension",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "alias-jump",
+      "properties": {
+        "aliasJump.projects": {
+          "type": "array",
+          "default": ["/"],
+          "description": "子项目目录名"
+        },
+        "aliasJump.alias": {
+          "type": "object",
+          "default": {
+            "@": "/src"
+          },
+          "description": "alias映射"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "yarn run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gp5251/alias_jump"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.47.0",
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^13.11.0",
+    "eslint": "^6.8.0",
+    "glob": "^7.1.6",
+    "mocha": "^7.1.2",
+    "typescript": "^3.8.3",
+    "vscode-test": "^1.3.0"
+  }
+}
