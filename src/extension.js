@@ -3,4 +3,5 @@
  */
 exports.activate = function(context) {
     require('./jump-to-definition')(context); // 跳转到定义
+    require('./completion')(context); // 自动补全
 };

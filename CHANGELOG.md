@@ -2,8 +2,10 @@
 
 All notable changes to the "alias-jump" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 1.0.5
 
-## [Unreleased]
+- 增加alias路径提示
 
-- Initial release
+## 1.0.3
+
+- 实现alias文件跳转

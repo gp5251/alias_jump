@@ -4,49 +4,20 @@
 const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
+const { getRootPath, getCurPrj } = require('../utils')
 
 function provideDefinition(document, position, token) {
     const curFilePath = document.fileName;
     const line        = document.lineAt(position);
-    const folders     = vscode.workspace.workspaceFolders;
-    let rootPath      = vscode.workspace.rootPath;
-    if (folders.length > 1) {
-        for (let i = 0; i < folders.length; i++) {
-            let folder = folders[i];
-            if (curFilePath.indexOf(folder.uri.path) === 0) {
-                rootPath = folder.uri.path
-                break;
-            }
-        }
-    }
-
-    const exp = /\brequire\((['"])(@[^'"]+?)\1\)|\bfrom\s+(['"])(@[^'"]+?)\3/;
-    const match = line.text.match(exp);
+    const rootPath    = getRootPath(curFilePath);
+    const exp         = /\brequire\((['"])(@[^'"]+?)\1\)|\bfrom\s+(['"])(@[^'"]+?)\3/;
+    const match       = line.text.match(exp);
 
     if (match) {
-        const aliasMap = vscode.workspace.getConfiguration().get('aliasJump.alias');
-        const projects = vscode.workspace.getConfiguration().get('aliasJump.projects');
-        let curPrjName;
-        let curPrjPath;
-
-        if (projects.length) {
-            // 多项目
-            projects.some(prj => {
-                let prjPath = path.join(rootPath, prj);
-                if (curFilePath.indexOf(prjPath) === 0) {
-                    curPrjName = prj
-                    curPrjPath = prjPath
-                    return true
-                }
-            })
-        } else {
-            // 单项目
-            curPrjPath = rootPath
-            curPrjName = '/'
-        }
-
-        const relPath = match[2] || match[4]; // @/a/b/c
-        let fPath = '';
+        const aliasMap       = vscode.workspace.getConfiguration().get('aliasJump.alias');
+        const { curPrjName } = getCurPrj(curFilePath, rootPath);
+        const relPath        = match[2] || match[4];                                        // @/a/b/c
+        let   fPath          = '';
         const findPath = function (aliaKey, aliaValue){ // => "@", "src"
             const dirArr = relPath.split('/').map(item =>  item === aliaKey ? aliaValue : item).join('/').split('/'); // @/a/b/c => src/a/b/c
             if (
