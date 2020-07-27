@@ -47,6 +47,7 @@ function provideDefinition(document, position, token) {
         let found;
         if (ext) {
             found = fs.existsSync(fPath);
+            if (found) filePath = fPath;
         } else {
             const exts = ['js', 'vue', 'json', 'jsx', 'css', 'less']; 
 
