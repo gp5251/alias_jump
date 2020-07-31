@@ -2,10 +2,14 @@
   "name": "alias-jump",
   "displayName": "Alias Jump",
   "publisher": "paulgui",
-	"description": "主要为了解决vscode 不能跳转alias别名文件的问题（如‘@/components/componentA’），支持单个项目，或者一个项目中存在多个子项目的情况",
-  "keywords": [ "vscode", "alias", "jump" ],
+  "description": "主要为了解决vscode 不能跳转alias别名文件的问题（如‘@/components/componentA’），支持单个项目，或者一个项目中存在多个子项目的情况",
+  "keywords": [
+    "vscode",
+    "alias",
+    "jump"
+  ],
   "icon": "images/logo.png",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "engines": {
     "vscode": "^1.32.0"
   },
@@ -23,11 +27,6 @@
       "type": "object",
       "title": "alias-jump",
       "properties": {
-        "aliasJump.projects": {
-          "type": "array",
-          "default": ["/"],
-          "description": "子项目目录名"
-        },
         "aliasJump.alias": {
           "type": "object",
           "default": {
@@ -48,10 +47,10 @@
     "url": "https://github.com/gp5251/alias_jump"
   },
   "devDependencies": {
-    "@types/vscode": "^1.32.0",
     "@types/glob": "^7.1.1",
     "@types/mocha": "^7.0.2",
     "@types/node": "^13.11.0",
+    "@types/vscode": "^1.32.0",
     "eslint": "^6.8.0",
     "glob": "^7.1.6",
     "mocha": "^7.1.2",

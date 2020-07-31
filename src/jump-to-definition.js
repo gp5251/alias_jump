@@ -4,7 +4,7 @@
 const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
-const { getRootPath, getCurPrj } = require('../utils')
+const { getRootPath, getFilePath } = require('../utils')
 
 function provideDefinition(document, position, token) {
     const curFilePath = document.fileName;
@@ -14,31 +14,8 @@ function provideDefinition(document, position, token) {
     const match       = line.text.match(exp);
 
     if (match) {
-        const aliasMap       = vscode.workspace.getConfiguration().get('aliasJump.alias');
-        const { curPrjName } = getCurPrj(curFilePath, rootPath);
-        const relPath        = match[2] || match[4];                                        // @/a/b/c
-        let   fPath          = '';
-        const findPath = function (aliaKey, aliaValue){ // => "@", "src"
-            const dirArr = relPath.split('/').map(item =>  item === aliaKey ? aliaValue : item).join('/').split('/'); // @/a/b/c => src/a/b/c
-            if (
-                curPrjName === dirArr[0] || 
-                dirArr[0] === '' // 单项目 或者主项目
-            ){
-                fPath = path.join(rootPath, dirArr.join('/'));
-                return true
-            }
-        }; 
-        Object.keys(aliasMap)
-        .some(key => { // => "@"
-            if (key === relPath.split('/')[0]) {// 存在映射关系
-                const alias = aliasMap[key] // => ["a/src", "b/src", ...]
-                if (Array.isArray(alias)) {
-                    return alias.some(item => findPath(key, item))
-                } else {
-                    return findPath(key, alias)
-                }
-            }
-        });
+        const relPath = match[2] || match[4];                         // @/a/b/c
+        const fPath   = getFilePath(curFilePath, relPath, rootPath);
 
         if (!fPath) return;
 
