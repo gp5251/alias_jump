@@ -10,7 +10,7 @@ function provideDefinition(document, position, token) {
     const curFilePath = document.fileName;
     const line        = document.lineAt(position);
     const rootPath    = getRootPath(curFilePath);
-    const exp         = /\brequire\((['"])(@[^'"]+?)\1\)|\bfrom\s+(['"])(@[^'"]+?)\3/;
+    const exp         = /\brequire\((['"])(@[^'"]+?)\1\)|\b(?:from|import)\s+(['"])(@[^'"]+?)\3/;
     const match       = line.text.match(exp);
 
     if (match) {

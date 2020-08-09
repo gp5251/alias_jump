@@ -26,3 +26,28 @@
   }
 }
 ```
+
+Mainly to solve the problem that vscode cannot jump to a *alias file* (such as ‘@/components/componentA’), to support a single project, or there are multiple sub-projects in a project
+
+By default @ =>'src' alias mapping is enabled
+
+If there are other aliases, such as @pages, @components, or multiple sub-projects, additional configuration is required. Please refer to:
+
+```js
+{
+  // alias映射, 映射路径相对于主项目根目录
+  "aliasJump.alias": {
+      // 多个子项目使用数组配置
+      "@": [
+          "/projectA/src", //子项目A下 @ => /src 的映射
+          "/projectB/src", // ...
+          "/projectC/src", // ...
+          "/src" // 主项目下 @ => /src 的映射
+      ],
+      // 配置 子项目A, 子项目C 下 @components 到各自 src/components 的映射
+      "@components": ["/projectA/src/components", "/projectC/src/components"],
+      // 单独配置 子项目C 下 @pages 到 src/pagges 的映射
+      "@pages": "/projectC/src/pages"
+  }
+}
+```

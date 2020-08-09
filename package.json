@@ -2,14 +2,14 @@
   "name": "alias-jump",
   "displayName": "Alias Jump",
   "publisher": "paulgui",
-  "description": "主要为了解决vscode 不能跳转alias别名文件的问题（如‘@/components/componentA’），支持单个项目，或者一个项目中存在多个子项目的情况",
+  "description": "Mainly to solve the problem that vscode cannot jump to an alias file.主要为了解决vscode 不能跳转alias别名文件的问题（如‘@/components/componentA’），支持单个项目，或者一个项目中存在多个子项目的情况",
   "keywords": [
     "vscode",
     "alias",
     "jump"
   ],
   "icon": "images/logo.png",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "engines": {
     "vscode": "^1.32.0"
   },

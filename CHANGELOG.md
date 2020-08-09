@@ -2,6 +2,10 @@
 
 All notable changes to the "alias-jump" extension will be documented in this file.
 
+## 1.0.7
+
+- 支持 import '@/file/path'
+
 ## 1.0.6
 
 - 去掉多余配置项
