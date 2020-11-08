@@ -9,7 +9,7 @@
     "jump"
   ],
   "icon": "images/logo.png",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "engines": {
     "vscode": "^1.32.0"
   },

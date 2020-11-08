@@ -47,7 +47,7 @@ function provideDefinition(document, position, token) {
 }
 
 module.exports = function(context) {
-    context.subscriptions.push(vscode.languages.registerDefinitionProvider(['javascript', 'vue', 'jsx'], {
+    context.subscriptions.push(vscode.languages.registerDefinitionProvider(['javascript', 'vue', 'ts', 'jsx'], {
         provideDefinition
     }));
 };
